@@ -75,7 +75,7 @@ public class Stopwatch extends View {
         mNeedlePaint.setPathEffect(new CornerPathEffect(5));
         mNeedlePaint.setStyle(Paint.Style.FILL);
         mNeedlePaint.setColor(getResources().getColor(mColor));
-        mNeedlePaint.setAlpha(50);
+        mNeedlePaint.setAlpha(30);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Stopwatch extends View {
         super.onDraw(canvas);
 
         calculateRadius(canvas);
-        drawCircles(canvas);
+        drawCircle(canvas);
         drawTopElementPath(canvas);
         drawSideButtons(canvas);
         drawNeedle(canvas);
@@ -95,19 +95,10 @@ public class Stopwatch extends View {
         }
     }
 
-    private void drawCircles(Canvas canvas) {
+    private void drawCircle(Canvas canvas) {
 
-        /**
-         * Main circle
-         */
+        /* Main circle */
         canvas.drawCircle(canvas.getWidth() / 2, canvas.getHeight() / 2, radius, mCirclePaint);
-
-        /**
-         * Inner circle
-         */
-        mCirclePaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(canvas.getWidth() / 2, canvas.getHeight() / 2, (float) (radius * 0.15), mNeedlePaint);
-        mCirclePaint.setStyle(Paint.Style.STROKE);
     }
 
     private void drawSideButtons(Canvas canvas) {
@@ -155,7 +146,8 @@ public class Stopwatch extends View {
             mNeedlePath.lineTo(canvas.getWidth() / 2 + 20, (float) (canvas.getHeight() / 2 + (radius * 0.15) - ((radius * 0.15) * 0.1)));
             mNeedlePath.lineTo(canvas.getWidth() / 2, (float) (canvas.getHeight() / 2 + (radius * 0.15) + 50));
             mNeedlePath.lineTo(canvas.getWidth() / 2 - 20, (float) (canvas.getHeight() / 2 + (radius * 0.15) - ((radius * 0.15) * 0.1)));
-            mNeedlePath.close();
+            mNeedlePath.addCircle(canvas.getWidth() / 2, canvas.getHeight() / 2, (float) (radius * 0.15), Path.Direction.CW);
+            mNeedlePath.lineTo(canvas.getWidth() / 2 - 20, (float) (canvas.getHeight() / 2 - radius + (radius * 0.15)));
         }
     }
 
