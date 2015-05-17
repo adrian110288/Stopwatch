@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    tools:context=".TimerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:weightSum="1">
+
+        <com.adrianlesniak.timesheet.views.MainButton
+            android:id="@+id/button_start"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_button_selector"
+            android:text="Start"
+            android:onClick="startClicked"
+            android:layout_marginRight="8dp"
+            android:visibility="visible" />
+
+        <com.adrianlesniak.timesheet.views.MainButton
+            android:id="@+id/button_stop"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_button_selector"
+            android:text="Stop"
+            android:onClick="stopClicked"
+            android:layout_marginLeft="8dp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <com.adrianlesniak.timesheet.views.Stopwatch
+        android:id="@+id/stopwatch"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Time"
+        android:textSize="25dp"
+        android:textColor="@android:color/holo_blue_dark" />
+
+
+</RelativeLayout>
