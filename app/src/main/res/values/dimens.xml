@@ -3,5 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="main_button_width">160dp</dimen>
+    <dimen name="clock_margin_bottom">60dp</dimen>
+    <dimen name="main_button_height">70dp</dimen>
+    <integer name="main_button_icon_corner_radius">8</integer>
+
 </resources>

@@ -1,12 +1,10 @@
 package com.adrianlesniak.timesheet;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.adrianlesniak.timesheet.views.MainButton;
 import com.adrianlesniak.timesheet.views.Stopwatch;
@@ -26,36 +24,25 @@ public class TimerActivity extends ActionBarActivity {
     private TimerThread mCurrentThread;
     private TimerHandler mHander = new TimerHandler();
 
-    @InjectView(R.id.button_start)
-    MainButton mStartButton;
-
-    @InjectView(R.id.button_stop)
-    MainButton mStopButton;
-
-    @InjectView(R.id.time)
-    TextView mTimeText;
-
     @InjectView(R.id.stopwatch)
     Stopwatch mStopWatch;
+
+    @InjectView(R.id.button)
+    MainButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
         ButterKnife.inject(this);
-
-        mTimeText.setTypeface(Typeface.createFromAsset(getAssets(), "sofachromerg.ttf"));
     }
 
-    public void startClicked(View v) {
-        mStopWatch.startTimer();
-        mCurrentThread = new TimerThread(mHander);
-        mCurrentThread.start();
+    public void show(View v) {
+        button.show();
     }
 
-    public void stopClicked(View v) {
-        mStopWatch.stopTimer();
-        mCurrentThread.setCanStop(true);
+    public void hide(View v) {
+        button.hide();
     }
 
     private class TimerHandler extends Handler {
@@ -63,7 +50,6 @@ public class TimerActivity extends ActionBarActivity {
         @Override
         public void handleMessage(Message msg) {
             String time = msg.getData().getString("time");
-            mTimeText.setText(time);
         }
     }
 

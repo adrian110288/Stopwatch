@@ -1,26 +1,48 @@
 package com.adrianlesniak.timesheet.views;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
+import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.adrianlesniak.timesheet.R;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by Adrian on 16-May-15.
  */
-public class MainButton extends Button {
+public class MainButton extends RelativeLayout {
 
-    private static Animation sButtonHideAnimation;
-    private static Animation sButtonRevealAnimation;
-    private static Animation sButtonDrawableRotateAnimation;
-    private Drawable mDrawableLeft;
+    private enum Type {
+        START, STOP
+    }
 
-    public MainButton(Context context) {
-        this(context, null);
+    @InjectView(R.id.iconPlay)
+    View mPlayIcon;
+
+    @InjectView(R.id.iconStop)
+    View mStopIcon;
+
+    @InjectView(R.id.title)
+    TextView mTitle;
+
+    private static final int LAYOUT = R.layout.main_button_layout;
+    private static final AccelerateInterpolator interpolator = new AccelerateInterpolator();
+
+    private Type mType = Type.START;
+    private View mVisibleIcon;
+    private float mIconXPos = -1;
+    private float mTitleXPos = -1;
+
+    public MainButton(Context context, Type typeIn) {
+        super(context);
+        mType = typeIn;
+        setup(context);
     }
 
     public MainButton(Context context, AttributeSet attrs) {
@@ -29,19 +51,39 @@ public class MainButton extends Button {
     }
 
     private void setup(Context context) {
-        sButtonHideAnimation = AnimationUtils.loadAnimation(context, R.anim.main_button_hide_animation);
-        sButtonRevealAnimation = AnimationUtils.loadAnimation(context, R.anim.main_button_reveal_animation);
-        sButtonDrawableRotateAnimation = AnimationUtils.loadAnimation(context, R.anim.main_button_drawable_left_rotate_animation);
-        mDrawableLeft = getCompoundDrawables()[0];
+
+        View.inflate(context, LAYOUT, this);
+        ButterKnife.inject(this);
+
+        mTitle.setTypeface(Typeface.createFromAsset(context.getAssets(), "sofachromerg.ttf"));
+
+        if (mType == Type.START) {
+            setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+            mPlayIcon.setVisibility(View.VISIBLE);
+            mVisibleIcon = mPlayIcon;
+            mTitle.setText("Start");
+        }
+
+        if (mType == Type.STOP) {
+            setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+            mStopIcon.setVisibility(View.VISIBLE);
+            mVisibleIcon = mStopIcon;
+            mTitle.setText("Stop");
+        }
+
+        mIconXPos = mVisibleIcon.getX();
+        mTitleXPos = mTitle.getX();
     }
 
     public void show() {
-        this.setVisibility(VISIBLE);
-        this.startAnimation(sButtonRevealAnimation);
+        animate().translationX(0).setInterpolator(interpolator).start();
+        mVisibleIcon.animate().translationX(mIconXPos).setInterpolator(interpolator).setStartDelay(80).start();
+        mTitle.animate().translationX(mTitleXPos).setInterpolator(interpolator).setStartDelay(120).start();
     }
 
     public void hide() {
-        this.startAnimation(sButtonHideAnimation);
-        this.setVisibility(GONE);
+        mTitle.animate().translationX(MainButton.this.getWidth()).setInterpolator(interpolator).start();
+        mVisibleIcon.animate().translationX(MainButton.this.getWidth()).setInterpolator(interpolator).setStartDelay(120).start();
+        animate().translationX(MainButton.this.getWidth()).setInterpolator(interpolator).setStartDelay(80).start();
     }
 }
