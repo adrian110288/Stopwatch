@@ -18,27 +18,14 @@ import butterknife.InjectView;
  */
 public class MainButton extends RelativeLayout {
 
-    private enum Type {
-        START, STOP
-    }
-
-    @InjectView(R.id.iconPlay)
-    View mPlayIcon;
-
-    @InjectView(R.id.iconStop)
-    View mStopIcon;
-
+    private static final int LAYOUT = 0;
+    private static final AccelerateInterpolator interpolator = new AccelerateInterpolator();
     @InjectView(R.id.title)
     TextView mTitle;
-
-    private static final int LAYOUT = R.layout.main_button_layout;
-    private static final AccelerateInterpolator interpolator = new AccelerateInterpolator();
-
     private Type mType = Type.START;
     private View mVisibleIcon;
     private float mIconXPos = -1;
     private float mTitleXPos = -1;
-
     public MainButton(Context context, Type typeIn) {
         super(context);
         mType = typeIn;
@@ -59,15 +46,11 @@ public class MainButton extends RelativeLayout {
 
         if (mType == Type.START) {
             setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-            mPlayIcon.setVisibility(View.VISIBLE);
-            mVisibleIcon = mPlayIcon;
             mTitle.setText("Start");
         }
 
         if (mType == Type.STOP) {
             setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
-            mStopIcon.setVisibility(View.VISIBLE);
-            mVisibleIcon = mStopIcon;
             mTitle.setText("Stop");
         }
 
@@ -85,5 +68,9 @@ public class MainButton extends RelativeLayout {
         mTitle.animate().translationX(MainButton.this.getWidth()).setInterpolator(interpolator).start();
         mVisibleIcon.animate().translationX(MainButton.this.getWidth()).setInterpolator(interpolator).setStartDelay(120).start();
         animate().translationX(MainButton.this.getWidth()).setInterpolator(interpolator).setStartDelay(80).start();
+    }
+
+    private enum Type {
+        START, STOP
     }
 }
