@@ -1,8 +1,28 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/primary</item>
+        <item name="android:colorControlNormal">@color/primary</item>
+    </style>
+
+    <!-- Views styles -->
+    <style name="TimeButtonStyle">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:elevation">5dp</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:title">@string/app_name</item>
+        <item name="android:layout_height">?android:actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
     </style>
 
 </resources>

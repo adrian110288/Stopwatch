@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#223547</color>
+    <color name="primary_dark">#192633</color>
+
+    <color name="start_fab_color">#005C00</color>
+    <color name="stop_fab_color">#B81212</color>
+
+    <color name="time_color">@android:color/white</color>
+</resources>

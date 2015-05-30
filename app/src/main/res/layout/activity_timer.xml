@@ -1,36 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-
     tools:context=".TimerActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarStyle" />
 
     <com.adrianlesniak.timesheet.views.Stopwatch
         android:id="@+id/stopwatch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/clock_margin_bottom" />
+        android:layout_height="match_parent" />
 
-    <com.adrianlesniak.timesheet.views.MainButton
-        android:id="@+id/button"
+    <com.adrianlesniak.timesheet.views.TimeBoard
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_button_height"
-        android:layout_alignParentBottom="true" />
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
 
-    <Button
-        android:id="@+id/hide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hide"
-        android:onClick="hide" />
+    <com.adrianlesniak.timesheet.views.TimeControlButton
+        android:id="@+id/startButton"
+        style="@style/TimeButtonStyle"
+        local:buttonType="start" />
 
-    <Button
-        android:id="@+id/show"
-        android:layout_toRightOf="@+id/hide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show"
-        android:onClick="show" />
+    <com.adrianlesniak.timesheet.views.TimeControlButton
+        android:id="@+id/stopButton"
+        style="@style/TimeButtonStyle"
+        local:buttonType="stop" />
 
 </RelativeLayout>
