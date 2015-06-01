@@ -76,6 +76,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mTimerStarted = !mTimerStarted;
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

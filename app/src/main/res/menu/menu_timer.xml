@@ -2,17 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".TimerActivity">
-
     <item
         android:id="@+id/action_records"
         android:icon="@drawable/ic_assignment_white_24dp"
         android:title="Records"
         android:visible="true"
         app:showAsAction="ifRoom" />
-
     <item
         android:id="@+id/action_settings"
         android:title="Settings"
         app:showAsAction="collapseActionView" />
-
 </menu>

@@ -1,12 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:colorAccent">@color/primary</item>
         <item name="android:colorControlNormal">@color/primary</item>
         <item name="android:toolbarStyle">@style/ToolbarStyle</item>
+        <item name="actionOverflowButtonStyle">@style/ActionBarOverflowIconStyle</item>
     </style>
 
     <!-- Views styles -->
@@ -23,6 +24,11 @@
         <item name="android:background">@color/primary</item>
         <item name="android:layout_height">?android:actionBarSize</item>
         <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="ActionBarOverflowIconStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_overflow_round</item>
+        <item name="android:colorBackground">@android:color/white</item>
     </style>
 
 </resources>
