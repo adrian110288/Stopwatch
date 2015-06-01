@@ -3,8 +3,12 @@
     <color name="primary">#223547</color>
     <color name="primary_dark">#192633</color>
 
-    <color name="start_fab_color">#005C00</color>
-    <color name="stop_fab_color">#B81212</color>
+    <color name="app_background_start">#13191C</color>
+    <color name="app_background_end">#263238</color>
 
+    <color name="start_fab_color">#388E3C</color>
+    <color name="stop_fab_color">#F44336</color>
+
+    <color name="toolbar_title_color">@android:color/white</color>
     <color name="time_color">@android:color/white</color>
 </resources>

@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
     tools:context=".TimerActivity">
 
-    <Toolbar
-        android:id="@+id/toolbar"
-        style="@style/ToolbarStyle" />
+    <include layout="@layout/toolbar_layout" />
 
     <com.adrianlesniak.timesheet.views.Stopwatch
         android:id="@+id/stopwatch"
@@ -15,6 +14,7 @@
         android:layout_height="match_parent" />
 
     <com.adrianlesniak.timesheet.views.TimeBoard
+        android:id="@+id/time_board"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true" />

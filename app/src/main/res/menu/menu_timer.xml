@@ -3,8 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".TimerActivity">
 
-<item
+    <item
+        android:id="@+id/action_records"
+        android:icon="@drawable/ic_assignment_white_24dp"
+        android:title="Records"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:title="Settings"
+        app:showAsAction="collapseActionView" />
+
 </menu>

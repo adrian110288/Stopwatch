@@ -6,6 +6,7 @@
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:colorAccent">@color/primary</item>
         <item name="android:colorControlNormal">@color/primary</item>
+        <item name="android:toolbarStyle">@style/ToolbarStyle</item>
     </style>
 
     <!-- Views styles -->
@@ -20,7 +21,6 @@
     <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:elevation">5dp</item>
         <item name="android:background">@color/primary</item>
-        <item name="android:title">@string/app_name</item>
         <item name="android:layout_height">?android:actionBarSize</item>
         <item name="android:layout_width">match_parent</item>
     </style>

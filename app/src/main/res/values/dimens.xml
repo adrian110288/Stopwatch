@@ -5,7 +5,9 @@
 
     <!-- Components -->
     <dimen name="fab_icon_size">12dp</dimen>
-
+    <dimen name="toolbar_title_size">36dp</dimen>
+    <dimen name="toolbar_title_left_margin">16dp</dimen>
+    <item name="toolbar_title_letter_spacing" format="float" type="string">0.15</item>
 
     <!-- Animations -->
     <integer name="fab_show_anim">250</integer>

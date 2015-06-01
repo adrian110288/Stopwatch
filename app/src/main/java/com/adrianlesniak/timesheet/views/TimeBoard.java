@@ -42,7 +42,6 @@ public class TimeBoard extends View {
     private void setup() {
         setupPaints();
         setupTimer();
-        //timeAnimator.start();
     }
 
     private void setupPaints() {
@@ -121,5 +120,13 @@ public class TimeBoard extends View {
 
     private void calculateMinutes() {
 
+    }
+
+    public void start() {
+        timeAnimator.start();
+    }
+
+    public void stop() {
+        timeAnimator.cancel();
     }
 }

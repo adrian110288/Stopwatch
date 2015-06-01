@@ -75,7 +75,7 @@ public class Stopwatch extends View {
         mNeedlePaint.setPathEffect(new CornerPathEffect(5));
         mNeedlePaint.setStyle(Paint.Style.FILL);
         mNeedlePaint.setColor(getResources().getColor(mColor));
-        mNeedlePaint.setAlpha(30);
+        mNeedlePaint.setAlpha(15);
     }
 
     @Override

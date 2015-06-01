@@ -2,6 +2,7 @@ package com.adrianlesniak.timesheet.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
@@ -10,17 +11,22 @@ import android.widget.RelativeLayout;
 
 import com.adrianlesniak.timesheet.R;
 import com.adrianlesniak.timesheet.Util;
-import com.adrianlesniak.timesheet.enums.Icon;
 import com.squareup.picasso.Picasso;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by Adrian on 29-May-15.
  */
 public class TimeControlButton extends RelativeLayout {
 
-    private Icon mIcon;
+    private static final int START = 0;
+    private static final int STOP = 1;
+    private
+    @Icon
+    int mIcon;
     private ImageView mIconView;
-
     public TimeControlButton(Context context) {
         this(context, null);
     }
@@ -39,14 +45,15 @@ public class TimeControlButton extends RelativeLayout {
         setElevation(Util.dpToPx(5));
         setupBackground();
         setupIcon();
+        if (mIcon == STOP) hide(false);
     }
 
     private void setupBackground() {
         int bgRes = -1;
 
-        if (mIcon == Icon.START) {
+        if (mIcon == START) {
             bgRes = R.drawable.start_fab_shape;
-        } else if (mIcon == Icon.STOP) {
+        } else if (mIcon == STOP) {
             bgRes = R.drawable.stop_fab_shape;
         }
 
@@ -65,24 +72,25 @@ public class TimeControlButton extends RelativeLayout {
         addView(mIconView);
 
         int iconRes = -1;
-        if (mIcon == Icon.START) {
+        if (mIcon == START) {
             iconRes = R.drawable.ic_play_arrow_white_48dp;
-        } else if (mIcon == Icon.STOP) {
+        } else if (mIcon == STOP) {
             iconRes = R.drawable.ic_pause_white_48dp;
         }
 
         Picasso.with(getContext()).load(iconRes).into(mIconView);
     }
 
-    private Icon retrieveIcon(int attrIn) {
-        Icon icon = null;
+    @Icon
+    private int retrieveIcon(int attrIn) {
+        @Icon int icon = 0;
 
         switch (attrIn) {
             case 0:
-                icon = Icon.START;
+                icon = START;
                 break;
             case 1:
-                icon = Icon.STOP;
+                icon = STOP;
                 break;
             default:
                 break;
@@ -126,5 +134,11 @@ public class TimeControlButton extends RelativeLayout {
 
     public void hide() {
         hide(true);
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({START, STOP})
+
+    public @interface Icon {
     }
 }
