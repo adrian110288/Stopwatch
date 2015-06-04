@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    tools:context=".TimerActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout" />
+
+    <com.adrianlesniak.timesheet.views.StopwatchNew
+        android:id="@+id/stopwatch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar" />
+
+    <com.adrianlesniak.timesheet.views.TimeControlButton
+        android:id="@+id/startButton"
+        style="@style/TimeButtonStyleAlternative"
+        local:buttonType="start" />
+
+    <com.adrianlesniak.timesheet.views.TimeControlButton
+        android:id="@+id/stopButton"
+        style="@style/TimeButtonStyleAlternative"
+        local:buttonType="stop" />
+
+</RelativeLayout>
