@@ -11,8 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.adrianlesniak.timesheet.R;
-import com.adrianlesniak.timesheet.views.Stopwatch;
-import com.adrianlesniak.timesheet.views.TimeBoard;
+import com.adrianlesniak.timesheet.views.StopwatchNew;
 import com.adrianlesniak.timesheet.views.TimeControlButton;
 
 import butterknife.ButterKnife;
@@ -21,13 +20,11 @@ import butterknife.InjectView;
 public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
 
     @InjectView(R.id.stopwatch)
-    Stopwatch mStopWatch;
+    StopwatchNew mStopWatch;
     @InjectView(R.id.startButton)
     TimeControlButton mStartButton;
     @InjectView(R.id.stopButton)
     TimeControlButton mStopButton;
-    @InjectView(R.id.time_board)
-    TimeBoard mTimeBoard;
     private boolean mTimerStarted = false;
 
     @Override
@@ -55,12 +52,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         swapTimerButtons();
 
         if (v == mStartButton) {
-            mStopWatch.startTimer();
-            mTimeBoard.start();
+            mStopWatch.start();
 
         } else if (v == mStopButton) {
-            mStopWatch.stopTimer();
-            mTimeBoard.stop();
+            mStopWatch.stop();
         }
     }
 
