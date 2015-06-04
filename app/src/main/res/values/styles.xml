@@ -27,7 +27,7 @@
     </style>
 
     <style name="ActionBarOverflowIconStyle" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_action_overflow_round</item>
+        <item name="android:src">@drawable/ic_action_navigation_more_vert</item>
         <item name="android:colorBackground">@android:color/white</item>
     </style>
 

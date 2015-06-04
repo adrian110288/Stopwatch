@@ -6,18 +6,16 @@
     android:background="@drawable/app_background"
     tools:context=".TimerActivity">
 
-    <include layout="@layout/toolbar_layout" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout" />
 
-    <com.adrianlesniak.timesheet.views.Stopwatch
+    <com.adrianlesniak.timesheet.views.StopwatchNew
         android:id="@+id/stopwatch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.adrianlesniak.timesheet.views.TimeBoard
-        android:id="@+id/time_board"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:layout_above="@+id/startButton"
+        android:layout_below="@id/toolbar" />
 
     <com.adrianlesniak.timesheet.views.TimeControlButton
         android:id="@+id/startButton"

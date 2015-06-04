@@ -12,4 +12,9 @@
     <!-- Animations -->
     <integer name="fab_show_anim">250</integer>
     <integer name="fab_hide_anim">200</integer>
+
+    <!-- Stopwatch dimensions -->
+    <dimen name="circle_stroke_width">6dp</dimen>
+    <dimen name="elements_corner_radius">2dp</dimen>
+    <dimen name="offset">@dimen/activity_vertical_margin</dimen>
 </resources>
