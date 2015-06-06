@@ -8,6 +8,8 @@
 
     <color name="start_fab_color">#388E3C</color>
     <color name="stop_fab_color">#F44336</color>
+    <color name="restart_fab_color">#1E88E5</color>
+    <color name="save_fab_color">#FF9800</color>
 
     <color name="toolbar_title_color">@android:color/white</color>
     <color name="time_color">@android:color/white</color>

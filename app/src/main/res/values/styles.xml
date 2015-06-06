@@ -1,18 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorPrimary">@color/primary</item>
-        <item name="android:colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:colorAccent">@color/primary</item>
-        <item name="android:colorControlNormal">@color/primary</item>
-        <item name="android:toolbarStyle">@style/ToolbarStyle</item>
-        <item name="actionOverflowButtonStyle">@style/ActionBarOverflowIconStyle</item>
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary</item>
     </style>
 
     <!-- Views styles -->
     <style name="TimeButtonStyle">
-        <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
         <item name="android:layout_height">wrap_content</item>
@@ -24,11 +20,18 @@
         <item name="android:background">@color/primary</item>
         <item name="android:layout_height">?android:actionBarSize</item>
         <item name="android:layout_width">match_parent</item>
+        <item name="android:theme">@style/ToolbarThemeBright</item>
     </style>
 
-    <style name="ActionBarOverflowIconStyle" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_action_navigation_more_vert</item>
-        <item name="android:colorBackground">@android:color/white</item>
+    <style name="ToolbarThemeBright" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="DialogEditTextStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
     </style>
 
 </resources>

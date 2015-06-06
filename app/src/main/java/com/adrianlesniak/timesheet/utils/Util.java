@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet;
+package com.adrianlesniak.timesheet.utils;
 
 import android.content.Context;
 import android.content.res.Resources;

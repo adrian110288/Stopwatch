@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.adrianlesniak.timesheet.R;
-import com.adrianlesniak.timesheet.Util;
+import com.adrianlesniak.timesheet.utils.Util;
 
 /**
  * Created by Adrian on 17-May-15.
@@ -36,19 +36,24 @@ public class StopwatchNew extends View {
     /*Paints */
     private TextPaint mTimePaint;
     private TextPaint mMilisTimePaint;
-    private ValueAnimator timeAnimator;
-
-    private Context mContext;
     private Paint mCirclePaint;
     private Paint mArcPaint;
-    private int mColor = android.R.color.white;
+
+    /* Colors */
+    private int mCircleColor = android.R.color.white;
+    private int mArcColor = R.color.stop_fab_color;
+    private int mTimeColor = R.color.time_color;
+
+    /* Arc values */
     private int radius = -1;
     private RectF mArcRect;
     private int mCircleSweepAngle = 0;
 
+    private ValueAnimator timeAnimator;
+
+
     public StopwatchNew(Context context) {
         this(context, null);
-        setup();
     }
 
     public StopwatchNew(Context context, AttributeSet attrs) {
@@ -57,34 +62,30 @@ public class StopwatchNew extends View {
     }
 
     private void setup() {
-        mContext = getContext();
-        setupCirclePaint();
-        setupTimePaints();
-        setupArcPaint();
+        setupPaints();
         setupTimer();
     }
 
-    private void setupCirclePaint() {
+    private void setupPaints() {
+        /* Circle paint */
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mCirclePaint.setColor(getResources().getColor(mColor));
+        mCirclePaint.setColor(getResources().getColor(mCircleColor));
         mCirclePaint.setStyle(Paint.Style.STROKE);
-    }
 
-    private void setupTimePaints() {
+        /* Time paint */
         mTimePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mMilisTimePaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
 
-        mTimePaint.setColor(getResources().getColor(R.color.time_color));
-        mMilisTimePaint.setColor(getResources().getColor(R.color.time_color));
+        mTimePaint.setColor(getResources().getColor(mTimeColor));
+        mMilisTimePaint.setColor(getResources().getColor(mTimeColor));
 
-        AssetManager assetManager = mContext.getAssets();
+        AssetManager assetManager = getContext().getAssets();
         mTimePaint.setTypeface(Typeface.createFromAsset(assetManager, "fonts/ostrich-regular.ttf"));
         mMilisTimePaint.setTypeface(Typeface.createFromAsset(assetManager, "fonts/ostrich-black.ttf"));
-    }
 
-    private void setupArcPaint() {
+        /* Arc paint */
         mArcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mArcPaint.setColor(getResources().getColor(R.color.stop_fab_color));
+        mArcPaint.setColor(getResources().getColor(mArcColor));
         mArcPaint.setStyle(Paint.Style.STROKE);
         mArcPaint.setStrokeCap(Paint.Cap.ROUND);
     }
@@ -150,7 +151,7 @@ public class StopwatchNew extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int milliseconds = (int) animation.getAnimatedValue();
-                recalculateTime(milliseconds);
+                calculateMiliseconds(milliseconds);
             }
         });
         timeAnimator.addListener(new AnimatorListenerAdapter() {
@@ -164,17 +165,14 @@ public class StopwatchNew extends View {
         timeAnimator.setRepeatMode(ValueAnimator.RESTART);
     }
 
-    private void recalculateTime(int millisecondsIn) {
+    private void calculateMiliseconds(int millisecondsIn) {
         if (millisecondsIn < 10) millisecondsRight = millisecondsIn;
         else {
             String s = String.valueOf(millisecondsIn);
             millisecondsLeft = Character.getNumericValue(s.charAt(0));
             millisecondsRight = Character.getNumericValue(s.charAt(1));
         }
-
-        mCircleSweepAngle++;
-        if (mCircleSweepAngle == 360) mCircleSweepAngle = 0;
-
+        updateCircleAndArc();
         invalidate();
     }
 
@@ -198,15 +196,22 @@ public class StopwatchNew extends View {
 
     private void calculateMinutes() {
         minutesPlaceholder++;
-
-        if (minutesPlaceholder < 10) minuteRight = secondPlaceholder;
+        if (minutesPlaceholder < 10) minuteRight = minutesPlaceholder;
         else {
             String s = String.valueOf(minutesPlaceholder);
             minuteLeft = Character.getNumericValue(s.charAt(0));
             minuteRight = Character.getNumericValue(s.charAt(1));
         }
-
         invalidate();
+    }
+
+    private void updateCircleAndArc() {
+        mCircleSweepAngle++;
+        if (mCircleSweepAngle == 360) {
+            mCircleSweepAngle = 0;
+            mCirclePaint.setColor(getResources().getColor(mCirclePaint.getColor() == getResources().getColor(mCircleColor) ? mArcColor : mCircleColor));
+            mArcPaint.setColor(getResources().getColor(mArcPaint.getColor() == getResources().getColor(mCircleColor) ? mArcColor : mCircleColor));
+        }
     }
 
     public void start() {
@@ -215,6 +220,21 @@ public class StopwatchNew extends View {
 
     public void stop() {
         timeAnimator.cancel();
+    }
+
+    public String getTime() {
+        return minuteLeft + minuteRight + ":" + secondLeft + secondRight + ":" + millisecondsLeft + millisecondsRight;
+    }
+
+    public void reset() {
+        if (timeAnimator.isRunning()) {
+            timeAnimator.cancel();
+        }
+        minutesPlaceholder = minuteLeft = minuteRight = secondPlaceholder = secondLeft = secondRight = millisecondsLeft = millisecondsRight = 0;
+        mCircleSweepAngle = 0;
+        mCirclePaint.setColor(getResources().getColor(mCircleColor));
+        mArcPaint.setColor(getResources().getColor(mArcColor));
+        invalidate();
     }
 
 }

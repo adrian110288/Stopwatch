@@ -10,8 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.adrianlesniak.timesheet.R;
-import com.adrianlesniak.timesheet.Util;
-import com.squareup.picasso.Picasso;
+import com.adrianlesniak.timesheet.utils.Util;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,6 +22,8 @@ public class TimeControlButton extends RelativeLayout {
 
     private static final int START = 0;
     private static final int STOP = 1;
+    private static final int RESTART = 2;
+    private static final int SAVE = 3;
     private
     @Icon
     int mIcon;
@@ -45,18 +46,26 @@ public class TimeControlButton extends RelativeLayout {
         setElevation(Util.dpToPx(5));
         setupBackground();
         setupIcon();
-        if (mIcon == STOP) hide(false);
+        if (mIcon != START) hide(false);
     }
 
     private void setupBackground() {
         int bgRes = -1;
 
-        if (mIcon == START) {
-            bgRes = R.drawable.start_fab_shape;
-        } else if (mIcon == STOP) {
-            bgRes = R.drawable.stop_fab_shape;
+        switch (mIcon) {
+            case START:
+                bgRes = R.drawable.start_fab_shape;
+                break;
+            case STOP:
+                bgRes = R.drawable.stop_fab_shape;
+                break;
+            case RESTART:
+                bgRes = R.drawable.restart_fab_shape;
+                break;
+            case SAVE:
+                bgRes = R.drawable.save_fab_shape;
+                break;
         }
-
         setBackgroundResource(bgRes);
     }
 
@@ -72,13 +81,21 @@ public class TimeControlButton extends RelativeLayout {
         addView(mIconView);
 
         int iconRes = -1;
-        if (mIcon == START) {
-            iconRes = R.drawable.ic_play_arrow_white_48dp;
-        } else if (mIcon == STOP) {
-            iconRes = R.drawable.ic_pause_white_48dp;
+        switch (mIcon) {
+            case START:
+                iconRes = R.drawable.ic_play_arrow_white_48dp;
+                break;
+            case STOP:
+                iconRes = R.drawable.ic_pause_white_48dp;
+                break;
+            case RESTART:
+                iconRes = R.drawable.ic_replay_white_24dp;
+                break;
+            case SAVE:
+                iconRes = R.drawable.ic_create_white_24dp;
+                break;
         }
-
-        Picasso.with(getContext()).load(iconRes).into(mIconView);
+        mIconView.setImageDrawable(getResources().getDrawable(iconRes, null));
     }
 
     @Icon
@@ -91,6 +108,12 @@ public class TimeControlButton extends RelativeLayout {
                 break;
             case 1:
                 icon = STOP;
+                break;
+            case 2:
+                icon = RESTART;
+                break;
+            case 3:
+                icon = SAVE;
                 break;
             default:
                 break;
@@ -137,7 +160,7 @@ public class TimeControlButton extends RelativeLayout {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({START, STOP})
+    @IntDef({START, STOP, RESTART, SAVE})
 
     public @interface Icon {
     }

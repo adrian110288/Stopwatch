@@ -20,11 +20,27 @@
     <com.adrianlesniak.timesheet.views.TimeControlButton
         android:id="@+id/startButton"
         style="@style/TimeButtonStyle"
+        android:layout_centerHorizontal="true"
         local:buttonType="start" />
 
     <com.adrianlesniak.timesheet.views.TimeControlButton
         android:id="@+id/stopButton"
         style="@style/TimeButtonStyle"
+        android:layout_centerHorizontal="true"
         local:buttonType="stop" />
+
+    <com.adrianlesniak.timesheet.views.TimeControlButton
+        android:id="@+id/restartButton"
+        style="@style/TimeButtonStyle"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        local:buttonType="restart" />
+
+    <com.adrianlesniak.timesheet.views.TimeControlButton
+        android:id="@+id/saveButton"
+        style="@style/TimeButtonStyle"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        local:buttonType="save" />
 
 </RelativeLayout>

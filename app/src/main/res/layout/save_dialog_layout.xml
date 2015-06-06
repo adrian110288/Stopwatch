@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:minWidth="500dp"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily=""
+            android:text="New Record"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/recordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/title_edit_text"
+        style="@style/DialogEditTextStyle"
+        android:layout_width="match_parent"
+        android:hint="Title"
+        android:maxLines="2" />
+
+    <EditText
+        android:id="@+id/comment_edit_text"
+        style="@style/DialogEditTextStyle"
+        android:layout_width="match_parent"
+        android:hint="Comment"
+        android:maxLines="2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tag_edit_text"
+            style="@style/DialogEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="New Tag"
+            android:maxLines="1" />
+
+        <Button
+            android:id="@+id/add_tag_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flat_button_selector"
+            android:text="ADD"
+            android:textColor="@color/primary" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+        <Button
+            android:id="@+id/save_record_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/flat_button_selector"
+            android:text="SAVE"
+            android:textColor="@color/start_fab_color" />
+
+        <Button
+            android:id="@+id/cancel_record_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/save_record_button"
+            android:background="@drawable/flat_button_selector"
+            android:text="CANCEL"
+            android:textColor="@color/stop_fab_color" />
+
+    </RelativeLayout>
+</LinearLayout>

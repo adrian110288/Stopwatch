@@ -1,23 +1,24 @@
 package com.adrianlesniak.timesheet.activities;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.adrianlesniak.timesheet.R;
+import com.adrianlesniak.timesheet.fragments.SaveRecordDialog;
 import com.adrianlesniak.timesheet.views.StopwatchNew;
 import com.adrianlesniak.timesheet.views.TimeControlButton;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
+public class TimerActivity extends AppCompatActivity implements View.OnClickListener, SaveRecordDialog.DismissListener {
 
     @InjectView(R.id.stopwatch)
     StopwatchNew mStopWatch;
@@ -25,6 +26,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     TimeControlButton mStartButton;
     @InjectView(R.id.stopButton)
     TimeControlButton mStopButton;
+    @InjectView(R.id.saveButton)
+    TimeControlButton mSaveButton;
+    @InjectView(R.id.restartButton)
+    TimeControlButton mRestartButton;
     private boolean mTimerStarted = false;
 
     @Override
@@ -36,7 +41,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         mStartButton.setOnClickListener(this);
         mStopButton.setOnClickListener(this);
+        mSaveButton.setOnClickListener(this);
+        mRestartButton.setOnClickListener(this);
     }
+
 
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -49,14 +57,36 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        swapTimerButtons();
 
-        if (v == mStartButton) {
-            mStopWatch.start();
+        if (v == mStartButton || v == mStopButton) {
+            swapTimerButtons();
+            if (v == mStartButton) {
+                mStopWatch.start();
+                mSaveButton.hide();
+                mRestartButton.hide();
 
-        } else if (v == mStopButton) {
-            mStopWatch.stop();
+            } else if (v == mStopButton) {
+                mStopWatch.stop();
+                mSaveButton.show();
+                mRestartButton.show();
+            }
+        } else if (v == mSaveButton) {
+            showSaveRecordDialog();
+        } else if (v == mRestartButton) {
+            mStopWatch.reset();
+            mSaveButton.hide();
+            mRestartButton.hide();
         }
+
+    }
+
+    private void showSaveRecordDialog() {
+        SaveRecordDialog saveRecordDialog = new SaveRecordDialog();
+        saveRecordDialog.setOnDismissListener(this);
+        Bundle b = new Bundle();
+        b.putString("time", mStopWatch.getTime());
+        saveRecordDialog.setArguments(b);
+        saveRecordDialog.show(getSupportFragmentManager(), "");
     }
 
     private void swapTimerButtons() {
@@ -71,11 +101,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mTimerStarted = !mTimerStarted;
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_timer, menu);
+        getMenuInflater().inflate(R.menu.menu_timer, menu);
         return true;
     }
 
@@ -85,11 +113,24 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
         switch (itemId) {
             case R.id.action_records: {
+                Intent resultsIntent = new Intent(this, ResultsActivity.class);
+                startActivity(resultsIntent);
                 break;
             }
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void resetTimer() {
+        mStopWatch.reset();
+        mSaveButton.hide();
+        mRestartButton.hide();
+    }
+
+    @Override
+    public void onSaveDialogDismissListener() {
+        resetTimer();
     }
 }
