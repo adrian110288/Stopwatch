@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet.activities;
+package com.adrianlesniak.stopwatch.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,15 +10,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.adrianlesniak.timesheet.R;
-import com.adrianlesniak.timesheet.fragments.SaveRecordDialog;
-import com.adrianlesniak.timesheet.views.StopwatchNew;
-import com.adrianlesniak.timesheet.views.TimeControlButton;
+import com.adrianlesniak.stopwatch.R;
+import com.adrianlesniak.stopwatch.fragments.SaveRecordDialog;
+import com.adrianlesniak.stopwatch.interfaces.SaveRecordDialogDismissListener;
+import com.adrianlesniak.stopwatch.views.StopwatchNew;
+import com.adrianlesniak.stopwatch.views.TimeControlButton;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class TimerActivity extends AppCompatActivity implements View.OnClickListener, SaveRecordDialog.DismissListener {
+public class TimerActivity extends AppCompatActivity implements View.OnClickListener, SaveRecordDialogDismissListener {
 
     @InjectView(R.id.stopwatch)
     StopwatchNew mStopWatch;
@@ -30,6 +31,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     TimeControlButton mSaveButton;
     @InjectView(R.id.restartButton)
     TimeControlButton mRestartButton;
+
     private boolean mTimerStarted = false;
 
     @Override
@@ -38,13 +40,15 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_timer);
         ButterKnife.inject(this);
         setupToolbar();
+        setupListeners();
+    }
 
+    private void setupListeners() {
         mStartButton.setOnClickListener(this);
         mStopButton.setOnClickListener(this);
         mSaveButton.setOnClickListener(this);
         mRestartButton.setOnClickListener(this);
     }
-
 
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,15 +81,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             mSaveButton.hide();
             mRestartButton.hide();
         }
-
     }
 
     private void showSaveRecordDialog() {
         SaveRecordDialog saveRecordDialog = new SaveRecordDialog();
-        saveRecordDialog.setOnDismissListener(this);
         Bundle b = new Bundle();
         b.putString("time", mStopWatch.getTime());
         saveRecordDialog.setArguments(b);
+        saveRecordDialog.setOnSaveDialogDismissListener(this);
         saveRecordDialog.show(getSupportFragmentManager(), "");
     }
 
@@ -123,14 +126,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    public void resetTimer() {
+    @Override
+    public void onDialogDismissed() {
         mStopWatch.reset();
         mSaveButton.hide();
         mRestartButton.hide();
-    }
-
-    @Override
-    public void onSaveDialogDismissListener() {
-        resetTimer();
     }
 }

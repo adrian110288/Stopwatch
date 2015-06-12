@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet.views;
+package com.adrianlesniak.stopwatch.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,8 +9,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.adrianlesniak.timesheet.R;
-import com.adrianlesniak.timesheet.utils.Util;
+import com.adrianlesniak.stopwatch.R;
+import com.adrianlesniak.stopwatch.utils.Util;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

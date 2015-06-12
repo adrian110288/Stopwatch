@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">Timesheet</string>
+    <string name="app_name">Stopwatch</string>
+
+    <string name="record_saved_message">Record saved</string>
+    <string name="search_view_hint">Search by title</string>
 </resources>

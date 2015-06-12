@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet;
+package com.adrianlesniak.stopwatch;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

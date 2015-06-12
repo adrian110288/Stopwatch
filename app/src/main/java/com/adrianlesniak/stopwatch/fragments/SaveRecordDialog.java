@@ -1,6 +1,5 @@
-package com.adrianlesniak.timesheet.fragments;
+package com.adrianlesniak.stopwatch.fragments;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -13,8 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adrianlesniak.timesheet.R;
-import com.adrianlesniak.timesheet.database.Record;
+import com.adrianlesniak.stopwatch.R;
+import com.adrianlesniak.stopwatch.database.Record;
+import com.adrianlesniak.stopwatch.interfaces.SaveRecordDialogDismissListener;
 
 import java.util.Date;
 
@@ -32,16 +32,17 @@ public class SaveRecordDialog extends DialogFragment implements View.OnClickList
     EditText mTitleEditText;
     @InjectView(R.id.comment_edit_text)
     EditText mCommentEditText;
-    @InjectView(R.id.tag_edit_text)
-    EditText mTagEditText;
-    @InjectView(R.id.add_tag_button)
-    Button mAddTagButton;
+    //    @InjectView(R.id.tag_edit_text)
+//    EditText mTagEditText;
+//    @InjectView(R.id.add_tag_button)
+//    Button mAddTagButton;
     @InjectView(R.id.save_record_button)
     Button mSaveButton;
     @InjectView(R.id.cancel_record_button)
     Button mCancelButton;
+
     private String mRecord;
-    private DismissListener mListener;
+    private SaveRecordDialogDismissListener mSaveRecordDialogDismissListener;
 
     @Nullable
     @Override
@@ -61,38 +62,28 @@ public class SaveRecordDialog extends DialogFragment implements View.OnClickList
     }
 
     private void setListeners() {
-        mAddTagButton.setOnClickListener(this);
+//        mAddTagButton.setOnClickListener(this);
         mSaveButton.setOnClickListener(this);
         mCancelButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
         if (v == mCancelButton) dismiss();
-        else if (v == mSaveButton) {
-            saveRecord();
-        }
-    }
-
-    public void setOnDismissListener(DismissListener listenerIn) {
-        mListener = listenerIn;
+        else if (v == mSaveButton) saveRecord();
     }
 
     private void saveRecord() {
-        Record newRecord = new Record(new Date(), mTitleEditText.getText().toString(), mRecord, "", null);
+        Record newRecord = new Record(new Date(), mTitleEditText.getText().toString(), mRecord, mCommentEditText.getText().toString(), null);
         newRecord.save();
         dismiss();
-        Toast.makeText(getActivity(), "Record saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), getResources().getString(R.string.record_saved_message), Toast.LENGTH_SHORT).show();
+        if (mSaveRecordDialogDismissListener != null)
+            mSaveRecordDialogDismissListener.onDialogDismissed();
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        if (mListener != null) mListener.onSaveDialogDismissListener();
+    public void setOnSaveDialogDismissListener(SaveRecordDialogDismissListener listenerIn) {
+        mSaveRecordDialogDismissListener = listenerIn;
     }
 
-    public interface DismissListener {
-        void onSaveDialogDismissListener();
-    }
 }

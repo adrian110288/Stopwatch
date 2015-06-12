@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet.views;
+package com.adrianlesniak.stopwatch.views;
 
 import android.content.Context;
 import android.graphics.Canvas;

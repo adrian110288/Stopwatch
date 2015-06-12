@@ -10,33 +10,33 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
-    <com.adrianlesniak.timesheet.views.StopwatchNew
+    <com.adrianlesniak.stopwatch.views.StopwatchNew
         android:id="@+id/stopwatch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/startButton"
         android:layout_below="@id/toolbar" />
 
-    <com.adrianlesniak.timesheet.views.TimeControlButton
+    <com.adrianlesniak.stopwatch.views.TimeControlButton
         android:id="@+id/startButton"
         style="@style/TimeButtonStyle"
         android:layout_centerHorizontal="true"
         local:buttonType="start" />
 
-    <com.adrianlesniak.timesheet.views.TimeControlButton
+    <com.adrianlesniak.stopwatch.views.TimeControlButton
         android:id="@+id/stopButton"
         style="@style/TimeButtonStyle"
         android:layout_centerHorizontal="true"
         local:buttonType="stop" />
 
-    <com.adrianlesniak.timesheet.views.TimeControlButton
+    <com.adrianlesniak.stopwatch.views.TimeControlButton
         android:id="@+id/restartButton"
         style="@style/TimeButtonStyle"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         local:buttonType="restart" />
 
-    <com.adrianlesniak.timesheet.views.TimeControlButton
+    <com.adrianlesniak.stopwatch.views.TimeControlButton
         android:id="@+id/saveButton"
         style="@style/TimeButtonStyle"
         android:layout_alignParentLeft="true"

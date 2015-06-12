@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet.views;
+package com.adrianlesniak.stopwatch.views;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -12,7 +12,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.adrianlesniak.timesheet.R;
+import com.adrianlesniak.stopwatch.R;
 
 /**
  * Created by Adrian on 30-May-15.

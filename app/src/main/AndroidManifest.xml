@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.adrianlesniak.timesheet">
+    package="com.adrianlesniak.stopwatch">
 
     <application
         android:name="com.orm.SugarApp"
@@ -12,7 +12,7 @@
         <!--For SugarORM-->
         <meta-data
             android:name="DATABASE"
-            android:value="timesheet.db" />
+            android:value="adrianlesniak.stopwatch.db" />
         <meta-data
             android:name="VERSION"
             android:value="1" />
@@ -21,17 +21,17 @@
             android:value="false" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.adrianlesniak.timesheet" />
+            android:value="com.adrianlesniak.stopwatch" />
 
-        <activity android:name=".activities.TimerActivity">
+        <activity android:name="com.adrianlesniak.stopwatch.activities.TimerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ResultsActivity"
-            android:parentActivityName=".activities.TimerActivity" />
+            android:name="com.adrianlesniak.stopwatch.activities.ResultsActivity"
+            android:parentActivityName="com.adrianlesniak.stopwatch.activities.TimerActivity" />
     </application>
 
 </manifest>

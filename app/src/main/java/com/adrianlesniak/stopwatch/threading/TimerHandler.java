@@ -1,9 +1,9 @@
-package com.adrianlesniak.timesheet.threading;
+package com.adrianlesniak.stopwatch.threading;
 
 import android.os.Handler;
 import android.os.Message;
 
-import com.adrianlesniak.timesheet.interfaces.TimeChangedListener;
+import com.adrianlesniak.stopwatch.interfaces.TimeChangedListener;
 
 /**
  * Created by Adrian on 30-May-15.

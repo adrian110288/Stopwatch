@@ -2,6 +2,7 @@
 <resources>
     <color name="primary">#223547</color>
     <color name="primary_dark">#192633</color>
+    <color name="record_text_color">#2C2C2C</color>
 
     <color name="app_background_start">#13191C</color>
     <color name="app_background_end">#263238</color>

@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet.threading;
+package com.adrianlesniak.stopwatch.threading;
 
 import android.os.Bundle;
 import android.os.Handler;

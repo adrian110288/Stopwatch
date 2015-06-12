@@ -1,4 +1,4 @@
-package com.adrianlesniak.timesheet.utils;
+package com.adrianlesniak.stopwatch.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
